@@ -12,14 +12,11 @@ namespace swappingelements
         {
             int a = 5;
             int b = 10;
-
             // Swap without temp variable using addition and subtraction
-            a = a + b; // a becomes 15
-            b = a - b; // b becomes 5 (original value of a)
-            a = a - b; // a becomes 10 (original value of b)
-
+            a = a + b; 
+            b = a - b; 
+            a = a - b; 
             Console.WriteLine($"a: {a}, b: {b}");
-
         }
     }
 }
