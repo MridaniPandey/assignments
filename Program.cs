@@ -1,22 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
-namespace swappingelements
+namespace Adoproject
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int a = 5;
-            int b = 10;
-            // Swap without temp variable using addition and subtraction
-            a = a + b; 
-            b = a - b; 
-            a = a - b; 
-            Console.WriteLine($"a: {a}, b: {b}");
+            update();
+        }
+
+        static void update()
+        {
+            string ConnectionString = "Data Source=LAPTOP-8GSJ41FL\\SQLEXPRESS;Initial Catalog=HamroStoreDB;Integrated Security=True;TrustServerCertificate=True";
+            SqlConnection con = new SqlConnection(ConnectionString);
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE Products SET Description='Latest Model 2024', Name='Iphone' WHERE Id='1'", con);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Update Successful...");
+                }
+                else
+                {
+                    Console.WriteLine("No rows were updated. Check the WHERE condition.");
+                }
+            }   
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
 }
